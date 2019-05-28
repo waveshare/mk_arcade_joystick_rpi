@@ -34,7 +34,7 @@ if [ x$1 != 'x2' ];then
     echo "options mk_arcade_joystick_rpi map=5 gpio=22,23,24,25,4,17,27,5,6,12,16,26" >> /etc/modprobe.d/joystick.conf
     echo "joystick 1"
 else 
-    echo "options mk_arcade_joystick_rpi map=5,0x20 gpio=22,23,24,25,4,17,27,5,6,12,16,26" >> /etc/modprobe.d/joystick.conf
+    echo "options mk_arcade_joystick_rpi map=1,2" >> /etc/modprobe.d/joystick.conf
     echo "joystick 2"
 fi
 
