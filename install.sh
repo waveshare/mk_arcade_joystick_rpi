@@ -30,37 +30,42 @@ if [[ -f "/etc/modprobe.d/joystick.conf" ]]; then
     rm -rf /etc/modprobe.d/joystick.conf
 fi
 
-if [ x$1 != 'x2' ];then
+if [ x$1 == 'x1' ];then
     echo "options mk_arcade_joystick_rpi map=5 gpio=22,23,24,25,4,17,27,5,6,12,16,26" >> /etc/modprobe.d/joystick.conf
     echo "joystick 1"
-else 
+elif  [ x$1 == 'x2' ];then  
     echo "options mk_arcade_joystick_rpi map=1,2" >> /etc/modprobe.d/joystick.conf
     echo "joystick 2"
+else
+    echo "options mk_arcade_joystick_rpi map=5 gpio=16,26,12,13,20,21,17,4,23,22,5,6" >> /etc/modprobe.d/joystick.conf
+    echo "joystick 3"
 fi
 
-echo "" >> /boot/config.txt
-grep -q "max_usb_current=1" /boot/config.txt || \
-    echo "max_usb_current=1" >> /boot/config.txt
+if [ x$1 != 'x3' ];then
+    echo "" >> /boot/config.txt
+    grep -q "max_usb_current=1" /boot/config.txt || \
+        echo "max_usb_current=1" >> /boot/config.txt
 
-grep -q "hdmi_force_hotplug=1" /boot/config.txt || \
-    echo "hdmi_force_hotplug=1" >> /boot/config.txt
+    grep -q "hdmi_force_hotplug=1" /boot/config.txt || \
+        echo "hdmi_force_hotplug=1" >> /boot/config.txt
 
-grep -q "config_hdmi_boost=10" /boot/config.txt || \
-    echo "config_hdmi_boost=10" >> /boot/config.txt
+    grep -q "config_hdmi_boost=10" /boot/config.txt || \
+        echo "config_hdmi_boost=10" >> /boot/config.txt
 
-grep -q "hdmi_group=2" /boot/config.txt || \
-    echo "hdmi_group=2" >> /boot/config.txt
+    grep -q "hdmi_group=2" /boot/config.txt || \
+        echo "hdmi_group=2" >> /boot/config.txt
 
-grep -q "hdmi_mode=87" /boot/config.txt || \
-    echo "hdmi_mode=87" >> /boot/config.txt
+    grep -q "hdmi_mode=87" /boot/config.txt || \
+        echo "hdmi_mode=87" >> /boot/config.txt
 
-grep -q "hdmi_cvt 1024 600 60 6 0 0 0" /boot/config.txt || \
-    echo "hdmi_cvt 1024 600 60 6 0 0 0" >> /boot/config.txt
+    grep -q "hdmi_cvt 1024 600 60 6 0 0 0" /boot/config.txt || \
+        echo "hdmi_cvt 1024 600 60 6 0 0 0" >> /boot/config.txt
 
-grep -q "avoid_warnings=1" /boot/config.txt || \
-    echo "avoid_warnings=1" >> /boot/config.txt
+    grep -q "avoid_warnings=1" /boot/config.txt || \
+        echo "avoid_warnings=1" >> /boot/config.txt
 
-grep -q "disable_splash=1" /boot/config.txt || \
-    echo "disable_splash=1" >> /boot/config.txt
+    grep -q "disable_splash=1" /boot/config.txt || \
+        echo "disable_splash=1" >> /boot/config.txt
+fi
 
 #sudo reboot
