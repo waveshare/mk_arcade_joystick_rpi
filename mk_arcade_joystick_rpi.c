@@ -366,8 +366,8 @@ static void mk_process_packet(struct mk *mk) {
  * mk_timer() initiates reads of console pads data.
  */
 
-static void mk_timer(unsigned long private) {
-    struct mk *mk = (void *) private;
+static void mk_timer(struct timer_list *t) {
+    struct mk *mk = from_timer(mk, t, timer);
     mk_process_packet(mk);
     mod_timer(&mk->timer, jiffies + MK_REFRESH_TIME);
 }
@@ -545,7 +545,7 @@ static struct mk __init *mk_probe(int *pads, int n_pads) {
     }
 
     mutex_init(&mk->mutex);
-    setup_timer(&mk->timer, mk_timer, (long) mk);
+    timer_setup(&mk->timer, mk_timer, 0);
 
     for (i = 0; i < n_pads && i < MK_MAX_DEVICES; i++) {
         if (!pads[i])
