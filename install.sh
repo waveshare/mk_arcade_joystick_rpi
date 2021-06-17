@@ -37,7 +37,7 @@ elif  [ x$1 == 'x2' ];then
     echo "options mk_arcade_joystick_rpi map=1,2" >> /etc/modprobe.d/joystick.conf
     echo "joystick 2"
 else
-    echo "options mk_arcade_joystick_rpi map=5 gpio=16,26,12,13,20,21,17,4,23,22,5,6" >> /etc/modprobe.d/joystick.conf
+    echo "options mk_arcade_joystick_rpi map=5 gpio=12,20,21,13,26,16,23,4,6,22,17,5" >> /etc/modprobe.d/joystick.conf
     echo "joystick 3"
 fi
 
